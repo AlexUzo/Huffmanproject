@@ -152,16 +152,16 @@ public class HuffProcessor {
 	
 	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
 		// TODO Auto-generated method stub
-		//while(in.readBits(BITS_PER_WORD) != -1) {
-			//String code = codings[in.readBits(BITS_PER_WORD)];
-			//out.writeBits(code.length(), Integer.parseInt(code,2));
-			//in.readBits(BITS_PER_WORD);
-		//}
-		String code;
-		for (int k =0; k < codings.length; k++) {
-			code = codings[k];
+		while(in.readBits(BITS_PER_WORD) != -1) {
+			String code = codings[in.readBits(BITS_PER_WORD)];
 			out.writeBits(code.length(), Integer.parseInt(code,2));
+			in.readBits(BITS_PER_WORD);
 		}
+		//String code;
+		//for (int k =0; k < codings.length; k++) {
+			//code = codings[k];
+			//out.writeBits(code.length(), Integer.parseInt(code,2));
+		//}
 		String end = codings[PSEUDO_EOF];
 		out.writeBits(end.length(), Integer.parseInt(end,2));
 	}
