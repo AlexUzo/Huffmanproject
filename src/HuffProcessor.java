@@ -92,7 +92,9 @@ public class HuffProcessor {
 			}
 			k++;
 		}
-		
+		if(myDebugLevel >= DEBUG_HIGH) {
+			System.out.printf("pq created with %d nodes\n", pq.size());
+		}
 		while(pq.size() > 1) {
 			HuffNode left = pq.remove();
 			HuffNode right = pq.remove();
@@ -127,6 +129,9 @@ public class HuffProcessor {
 		
 		if(root.myLeft == null && root.myRight == null) {
 			encodings[root.myValue] = string;
+			if(myDebugLevel >= DEBUG_HIGH) {
+				System.out.printf("encoding for %d is %s\n", root.myValue, string);
+			}
 			return;
 		}
 		
